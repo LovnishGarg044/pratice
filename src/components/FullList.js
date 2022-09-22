@@ -1,14 +1,6 @@
-import { format } from 'date-fns';
 import { motion } from 'framer-motion';
-import toast from 'react-hot-toast';
 import React, { useEffect, useState } from 'react';
-import { MdDelete, MdEdit } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
-import { deleteTodo, updateTodo } from '../slices/todoSlice';
-import styles from '../styles/modules/todoItem.module.scss';
-import { getClasses } from '../utils/getClasses';
-import CheckButton from './CheckButton';
-import TodoModal from './TodoModal';
+import styles from '../styles/modules/list.module.scss';
 
 const child = {
     hidden: { y: 20, opacity: 0 },
@@ -19,7 +11,7 @@ const child = {
   };
 
 function FullList( {todo} ) {
-   console.log(todo);
+   
 
 
   return (
@@ -32,7 +24,7 @@ function FullList( {todo} ) {
             >
              Title: {todo.title}
             </p>
-            <p className={styles.time}>
+            <p className={styles.des}>
             Description:{todo.description}
             </p>
             <p className={styles.time}>

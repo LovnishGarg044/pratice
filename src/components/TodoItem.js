@@ -1,4 +1,3 @@
-import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import React, { useEffect, useState } from 'react';
@@ -8,7 +7,7 @@ import { deleteTodo, updateTodo } from '../slices/todoSlice';
 import styles from '../styles/modules/todoItem.module.scss';
 import { getClasses } from '../utils/getClasses';
 import CheckButton from './CheckButton';
-import TodoModal from './TodoModal';
+import {TodoModal} from './TodoModal';
 
 const child = {
   hidden: { y: 20, opacity: 0 },
@@ -19,7 +18,7 @@ const child = {
 };
 
 function TodoItem({ todo }) {
-  console.log(todo)
+  
   const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
@@ -44,7 +43,7 @@ function TodoItem({ todo }) {
     dispatch(deleteTodo(todo.id));
     toast.success('Todo Deleted Successfully');
   };
-
+ 
   const handleUpdate = () => {
     setUpdateModalOpen(true);
   };
@@ -61,9 +60,10 @@ function TodoItem({ todo }) {
                 todo.status === 'complete' && styles['todoText--completed'],
               ])}
             >
+              
               {todo.title}
             </p>
-            <p className={styles.time}>
+            <p className={styles.des}>
             Description:{todo.description}
             </p>
             <p className={styles.time}>
@@ -73,7 +73,7 @@ function TodoItem({ todo }) {
              Due-Date:{todo.date}
             </p>
             <p >
-             <img src={todo.image} alt="imah"></img>
+            {/* <ImageLl></ImageLl> */}
             </p>
           </div>
         </div>
@@ -94,7 +94,7 @@ function TodoItem({ todo }) {
             tabIndex={0}
             role="button"
           >
-            <MdEdit />
+         <MdEdit />
           </div>
         </div>
       </motion.div>

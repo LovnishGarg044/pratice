@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { addTodo, updateTodo } from '../slices/todoSlice';
 import styles from '../styles/modules/modal.module.scss';
 import Button from './Button';
+import { NavLink } from 'react-router-dom';
 
 const dropIn = {
   hidden: {
@@ -31,35 +32,34 @@ const dropIn = {
 
 function TodoModal({ type, modalOpen, setModalOpen, todo }) {
   const dispatch = useDispatch();
-  const inputRef = useRef(null);
   const [title, setTitle] = useState('');
   const [status, setStatus] = useState('Low');
   const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState(null);
+  // const [image, setImage] = useState(null);
   useEffect(() => {
     if (type === 'update' && todo) {
       setTitle(todo.title);
       setStatus(todo.status);
       setDate(todo.date);
       setDescription(todo.description);
-      setImage(todo.image);
+      // setImage(todo.image);
     } else {
       setTitle('');
       setStatus('Low');
       setDate('');
       setDescription('');
-      
+      // setImage(null)
     }
-  }, [type, todo, modalOpen,image]);
-
+  }, [type, todo, modalOpen]);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title === '') {
       toast.error('Please enter a title');
       return;
     }
-    if (title, status,description,image && date) {
+    if (title, status,description && date) {
       if (type === 'add') {
         dispatch(
           addTodo({
@@ -68,13 +68,13 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
             status,
             date,
             description,
-            image,
+           
           })
         );
         toast.success('Task added successfully');
       }
       if (type === 'update') {
-        if (todo.title !== title || todo.status !== status || todo.date !== date || todo.description !== description || todo.image !== image) {
+        if (todo.title !== title || todo.status !== status || todo.date !== date || todo.description !== description) {
           dispatch(updateTodo({ ...todo, title, status, date ,description}));
           toast.success('Task Updated successfully');
         } else {
@@ -113,7 +113,7 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
               animate={{ top: -10, opacity: 1 }}
               exit={{ top: 40, opacity: 0 }}
             >
-              <MdOutlineClose />
+          <NavLink to="" style={{textDecoration: 'none',color:"var(--black-2)"}}>    <MdOutlineClose /></NavLink>
             </motion.div>
 
             <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
@@ -125,8 +125,10 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
                 <input
                   type="text"
                   id="title"
+                  maxLength="50"
                   value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  onChange={(e) => setTitle(e.target.value)
+                    }
                 />
               </label>
               <label htmlFor="type">
@@ -151,22 +153,22 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
               <input type="text"
                   id="description"
                   value={description}
+                  maxLength="200"
                   onChange={(e) => setDescription(e.target.value)}/>
               </label>
-              <label htmlFor="files">
+              {/* <label htmlFor="file">
                  Image 
               <input type="file"
                   id="image"
-                  
                   value={""}
                   onChange={(e) => setImage(e.target.files[0])}/>
-              </label>
+              </label> */}
               <div className={styles.buttonContainer}>
                 <Button type="submit" variant="primary">
-                  {type === 'add' ? 'Add Task' : 'Update Task'}
+            {type === 'add' ? 'Add Task' : 'Update Task'}
                 </Button>
                 <Button variant="secondary" onClick={() => setModalOpen(false)}>
-                  Cancel
+                <NavLink to="" style={{textDecoration: 'none',color:"var(--black-2)"}}>  Cancel</NavLink>
                 </Button>
               </div>
             </form>
@@ -176,5 +178,4 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
     </AnimatePresence>
   );
 }
-
-export default TodoModal;
+export {TodoModal};

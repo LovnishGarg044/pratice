@@ -48,7 +48,7 @@ export const todoSlice = createSlice({
             todo.title = action.payload.title;
             todo.date = action.payload.date;
             todo.description= action.payload.description;
-            todo.image= action.payload.image
+            // todo.image= action.payload.image
           }
         });
         window.localStorage.setItem('todoList', JSON.stringify(todoListArr));

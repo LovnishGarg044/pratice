@@ -10,14 +10,16 @@
 	text-transform: capitalize;
 	cursor: pointer;
 	overflow: hidden;
+	
 	&__select {
 		color: var(--black-2);
 		font-family: Poppins;
 		padding: 1rem;
+		text-align: center;
 		border: none;
 		background-color: var(--bg-3);
-
-		width: 150px;
+        // padding-right: 20px;
+		//width: 100px;
 		cursor: pointer;
 	}
 }
@@ -29,3 +31,21 @@
 	background-color: var(--bg-3);
 	color: var(--black-1);
 }
+select {
+	-webkit-appearance: none;
+	appearance: none;
+	  }
+	  @media only screen and (max-width: 640px) {
+		.button{
+			font-size: 10px;
+			white-space: nowrap;
+	text-overflow: ellipsis;
+	margin-right: 10px;
+	width: 70px;
+	padding: 5px 10px;
+	&__select {
+		width: 40px;
+		padding: 7px 10px
+	}
+		}
+	  }

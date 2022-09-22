@@ -24,13 +24,16 @@ function Button({ type, variant = 'primary', children, ...rest }) {
 
 function SelectButton({ children, id, ...rest }) {
   return (
+    <div className={styles.select}>
     <select
       id={id}
       className={getClasses([styles.button, styles.button__select])}
+     
       {...rest}
     >
       {children}
     </select>
+    </div>
   );
 }
 
